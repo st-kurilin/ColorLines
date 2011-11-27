@@ -22,7 +22,7 @@ public class PlayerImpl implements Player {
 
         for (int y = 0; y < Position.HEIGHT_RANGE.upperEndpoint(); y++) {
             for (int x = 0; x < Position.HEIGHT_RANGE.lowerEndpoint(); x++) {
-                Position position = new Position(x, y);
+                Position position = Position.create(x, y);
                 buf.append("|").append(
                         area.contains(position)
                                 ? colorToStringConverter.convert(area.take(position).color())
@@ -43,8 +43,8 @@ public class PlayerImpl implements Player {
                 int xd = Integer.parseInt(matcher.group(3));
                 int yd = Integer.parseInt(matcher.group(4));
 
-                Position endPos = new Position(xd, yd);
-                Position startPos = new Position(xs, ys);
+                Position endPos = Position.create(xd, yd);
+                Position startPos = Position.create(xs, ys);
 
                 if (area.contains(startPos)) {
                     Ball ball = area.take(startPos);
