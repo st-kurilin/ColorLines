@@ -17,7 +17,7 @@ public class GameCanBeContinuePredicate implements Predicate<Area> {
         int empty = 0;
         for (int x : X_VALUES)
             for (int y : Y_VALUES)
-                if (input.contains(Position.create(x, y))) empty++;
-        return empty < 7;
+                if (!input.contains(Position.create(x, y))) empty++;
+        return empty > 7;
     }
 }
