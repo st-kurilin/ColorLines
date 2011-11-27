@@ -5,5 +5,6 @@ package com.github.colorlines.domain;
  */
 public interface Ball {
     Color color();
+
     Position position();
 }
