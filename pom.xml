@@ -6,4 +6,24 @@
     <groupId>com.github</groupId>
     <artifactId>color-lines</artifactId>
     <version>1.0</version>
+    <dependencies>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>r09</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>3.0</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.3</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
