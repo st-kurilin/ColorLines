@@ -40,6 +40,7 @@ public class TurnValidatorImpl implements TurnValidator {
         do {
             final PathStep current = pathSteps.poll();
             if (current.current.equals(turn.moveTo())) {
+                return true;
             }
             final Set<Position> validNextSteps =
                     filter(neiborhoods(current.current), and(empty(area), nonVisited(visited)));
