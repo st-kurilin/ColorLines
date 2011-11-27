@@ -12,4 +12,8 @@ public interface Area {
      * @throws IllegalStateException if it doesn't contain any item at specified location
      */
     Ball take(Position location);
+
+    int getWidth();
+
+    int getHeight();
 }
