@@ -6,6 +6,7 @@ import com.github.colorlines.domain.Ball;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.inject.Singleton;
 import java.util.List;
 import java.util.Set;
 
@@ -16,7 +17,7 @@ import static com.google.common.collect.Lists.newArrayList;
  */
 
 @Named("areaCleanerWrapper")
-@GameScoped
+@Singleton
 public class CleanHistorer implements AreaCleaner {
     private final AreaCleaner cleaner;
     private final List<Integer> history = newArrayList();
