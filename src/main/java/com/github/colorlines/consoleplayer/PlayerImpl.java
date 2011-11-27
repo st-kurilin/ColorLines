@@ -18,8 +18,13 @@ public class PlayerImpl implements Player {
 
     public Turn turn(Area area, TurnValidator validator) {
         StringBuffer buf = new StringBuffer();
-
+        buf.append("| ");
+        for (int x = Position.WIDTH_RANGE.lowerEndpoint(); x <= Position.WIDTH_RANGE.upperEndpoint(); x++) {
+             buf.append("|").append(x);
+        }
+        buf.append("|\n");
         for (int y = Position.HEIGHT_RANGE.lowerEndpoint(); y <= Position.HEIGHT_RANGE.upperEndpoint(); y++) {
+            buf.append("|").append(y);
             for (int x = Position.WIDTH_RANGE.lowerEndpoint(); x <= Position.WIDTH_RANGE.upperEndpoint(); x++) {
                 Position position = Position.create(x, y);
                 buf.append("|").append(

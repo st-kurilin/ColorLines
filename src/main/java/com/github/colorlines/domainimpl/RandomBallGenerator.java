@@ -8,6 +8,7 @@ import com.google.common.collect.Ranges;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.inject.Provider;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
@@ -27,11 +28,20 @@ public class RandomBallGenerator implements BallGenerator {
 
     @Override
     public Set<Ball> generate() {
-        final ImmutableSet.Builder<Ball> builder = ImmutableSet.builder();
-        for (int i = 0; i < generateByOneTime; i++) {
-            builder.add(new SimpleBall(randomColor(), randomFreeLocation()));
+        final HashSet<Ball> set = new HashSet<Ball>();
+        while (set.size() != generateByOneTime) {
+            Position newPosition = randomFreeLocation();
+            boolean exists = false;
+            for(Ball b : set){
+                if(b.position().equals(newPosition)){
+                    exists = true;
+                }
+            }
+            if(!exists){
+                set.add(new SimpleBall(randomColor(), newPosition));
+            }
         }
-        return builder.build();
+        return set;
     }
 
     private Position randomFreeLocation() {
