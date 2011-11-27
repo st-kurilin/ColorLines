@@ -5,6 +5,6 @@ import java.util.Set;
 /**
  * @author Stanislav Kurilin
  */
-public interface ItemGenerator {
+public interface BallGenerator {
     Set<Ball> generate();
 }
