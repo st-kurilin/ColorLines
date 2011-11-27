@@ -7,17 +7,17 @@ import com.github.colorlines.domain.Position;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Iterables;
 
 import javax.annotation.Nullable;
 import javax.inject.Named;
-import java.util.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.Set;
 
-import static com.google.common.collect.Lists.*;
-import static com.google.common.collect.Sets.*;
+import static com.google.common.collect.Lists.newLinkedList;
 
 /**
- * @author Stanislav Kurilin
+ * @author Stanislav Kurilin, Alex Lenkevich
  */
 @Named("areaCleanerTarget")
 public class PatternBasedCleaner implements AreaCleaner {
@@ -46,24 +46,24 @@ public class PatternBasedCleaner implements AreaCleaner {
                 final LinkedList<Ball> candidate = newLinkedList();
                 for (int x = Position.WIDTH_RANGE.lowerEndpoint(); Position.WIDTH_RANGE.contains(x); x++) {
                     Position curPosition = Position.create(x, y);
-                    if(!area.contains(curPosition)){
-                        if(candidate.size() >= minBallsToDestroy){
+                    if (!area.contains(curPosition)) {
+                        if (candidate.size() >= minBallsToDestroy) {
                             result.addAll(candidate);
                         }
                         candidate.clear();
                         continue;
                     }
                     final Ball ball = area.take(curPosition);
-                    if(candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())){
+                    if (candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())) {
                         candidate.add(ball);
                     } else {
-                        if(candidate.size() >= minBallsToDestroy){
+                        if (candidate.size() >= minBallsToDestroy) {
                             result.addAll(candidate);
                         }
                         candidate.clear();
                     }
                 }
-                if(candidate.size() >= minBallsToDestroy){
+                if (candidate.size() >= minBallsToDestroy) {
                     result.addAll(candidate);
                 }
                 candidate.clear();
@@ -79,24 +79,24 @@ public class PatternBasedCleaner implements AreaCleaner {
                 final LinkedList<Ball> candidate = newLinkedList();
                 for (int y = Position.HEIGHT_RANGE.lowerEndpoint(); Position.HEIGHT_RANGE.contains(y); y++) {
                     Position curPosition = Position.create(x, y);
-                    if(!area.contains(curPosition)){
-                        if(candidate.size() >= minBallsToDestroy){
+                    if (!area.contains(curPosition)) {
+                        if (candidate.size() >= minBallsToDestroy) {
                             result.addAll(candidate);
                         }
                         candidate.clear();
                         continue;
                     }
                     final Ball ball = area.take(curPosition);
-                    if(candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())){
+                    if (candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())) {
                         candidate.add(ball);
                     } else {
-                        if(candidate.size() >= minBallsToDestroy){
+                        if (candidate.size() >= minBallsToDestroy) {
                             result.addAll(candidate);
                         }
                         candidate.clear();
                     }
                 }
-                if(candidate.size() >= minBallsToDestroy){
+                if (candidate.size() >= minBallsToDestroy) {
                     result.addAll(candidate);
                 }
                 candidate.clear();
@@ -111,9 +111,9 @@ public class PatternBasedCleaner implements AreaCleaner {
             for (int x = Position.WIDTH_RANGE.lowerEndpoint(); Position.WIDTH_RANGE.contains(x); x++) {
                 final LinkedList<Ball> candidate = newLinkedList();
                 for (int y = Position.HEIGHT_RANGE.lowerEndpoint(); Position.HEIGHT_RANGE.contains(y); y++) {
-                    for(int i = 0 ; i < Math.max(Position.HEIGHT_RANGE.upperEndpoint(), Position.HEIGHT_RANGE.upperEndpoint()) ; i ++ ){
-                        if(!Position.WIDTH_RANGE.contains(x + i) || !Position.HEIGHT_RANGE.contains(y + i) || !area.contains(Position.create(x + i, y + i))){
-                            if(candidate.size() >= minBallsToDestroy){
+                    for (int i = 0; i < Math.max(Position.HEIGHT_RANGE.upperEndpoint(), Position.HEIGHT_RANGE.upperEndpoint()); i++) {
+                        if (!Position.WIDTH_RANGE.contains(x + i) || !Position.HEIGHT_RANGE.contains(y + i) || !area.contains(Position.create(x + i, y + i))) {
+                            if (candidate.size() >= minBallsToDestroy) {
                                 result.addAll(candidate);
                             }
                             candidate.clear();
@@ -121,17 +121,17 @@ public class PatternBasedCleaner implements AreaCleaner {
                         }
                         Position curPosition = Position.create(x + i, y + i);
                         final Ball ball = area.take(curPosition);
-                        if(candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())){
+                        if (candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())) {
                             candidate.add(ball);
                         } else {
-                            if(candidate.size() >= minBallsToDestroy){
+                            if (candidate.size() >= minBallsToDestroy) {
                                 result.addAll(candidate);
                             }
                             candidate.clear();
                         }
                     }
                 }
-                if(candidate.size() >= minBallsToDestroy){
+                if (candidate.size() >= minBallsToDestroy) {
                     result.addAll(candidate);
                 }
                 candidate.clear();
@@ -146,9 +146,9 @@ public class PatternBasedCleaner implements AreaCleaner {
             for (int x = Position.WIDTH_RANGE.lowerEndpoint(); Position.WIDTH_RANGE.contains(x); x++) {
                 final LinkedList<Ball> candidate = newLinkedList();
                 for (int y = Position.HEIGHT_RANGE.lowerEndpoint(); Position.HEIGHT_RANGE.contains(y); y++) {
-                    for(int i = 0 ; i < Math.max(Position.HEIGHT_RANGE.upperEndpoint(), Position.HEIGHT_RANGE.upperEndpoint()) ; i ++ ){
-                        if(!Position.WIDTH_RANGE.contains(x - i) || !Position.HEIGHT_RANGE.contains(y + i) || !area.contains(Position.create(x - i, y + i))){
-                            if(candidate.size() >= minBallsToDestroy){
+                    for (int i = 0; i < Math.max(Position.HEIGHT_RANGE.upperEndpoint(), Position.HEIGHT_RANGE.upperEndpoint()); i++) {
+                        if (!Position.WIDTH_RANGE.contains(x - i) || !Position.HEIGHT_RANGE.contains(y + i) || !area.contains(Position.create(x - i, y + i))) {
+                            if (candidate.size() >= minBallsToDestroy) {
                                 result.addAll(candidate);
                             }
                             candidate.clear();
@@ -156,17 +156,17 @@ public class PatternBasedCleaner implements AreaCleaner {
                         }
                         Position curPosition = Position.create(x - i, y + i);
                         final Ball ball = area.take(curPosition);
-                        if(candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())){
+                        if (candidate.isEmpty() || candidate.getFirst().color().equals(ball.color())) {
                             candidate.add(ball);
                         } else {
-                            if(candidate.size() >= minBallsToDestroy){
+                            if (candidate.size() >= minBallsToDestroy) {
                                 result.addAll(candidate);
                             }
                             candidate.clear();
                         }
                     }
                 }
-                if(candidate.size() >= minBallsToDestroy){
+                if (candidate.size() >= minBallsToDestroy) {
                     result.addAll(candidate);
                 }
                 candidate.clear();
