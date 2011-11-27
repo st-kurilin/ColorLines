@@ -1,22 +1,29 @@
 package com.github.colorlines.domain;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Range;
-import com.google.common.collect.Ranges;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.collect.DiscreteDomains.integers;
+import static com.google.common.collect.Ranges.closed;
 
 /**
  * @author Stanislav Kurilin
  */
 public final class Position {
-    public static Range<Integer> WIDTH_RANGE = Ranges.closed(0, 8);
-    public static Range<Integer> HEIGHT_RANGE = Ranges.closed(0, 8);
+    @Deprecated //use iterator
+    public static Range<Integer> WIDTH_RANGE = closed(0, 8);
+    @Deprecated //use iterator
+    public static Range<Integer> HEIGHT_RANGE = closed(0, 8);
+
+    public static Iterable<Integer> X_VALUES = closed(0, 8).asSet(integers());
+    public static Iterable<Integer> Y_VALUES = closed(0, 8).asSet(integers());
 
     private final int x, y;
 
     public static Position create(int x, int y) {
-        checkArgument(WIDTH_RANGE.contains(x));
-        checkArgument(HEIGHT_RANGE.contains(y));
+        checkArgument(Iterables.contains(X_VALUES, x));
+        checkArgument(Iterables.contains(Y_VALUES, y));
         return new Position(x, y);
     }
 
