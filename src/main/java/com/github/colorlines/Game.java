@@ -2,16 +2,22 @@ package com.github.colorlines;
 
 import com.github.colorlines.domain.*;
 import com.github.colorlines.domainimpl.GameScope;
+import com.github.colorlines.domainimpl.MutableArea;
+import com.github.colorlines.domainimpl.SimpleBall;
 import com.google.common.base.Predicate;
+import com.google.common.collect.ImmutableSet;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Set;
+
+import static com.google.common.collect.ImmutableSet.of;
 
 /**
  * @author Stanislav Kurilin
  */
 public class Game {
-    private final Area area;
+    private final MutableArea area;
     private final Player player;
     private final AreaCleaner areaCleaner;
     private final BallGenerator ballGenerator;
@@ -20,15 +26,16 @@ public class Game {
     private final GameScope scope;
 
     @Inject
-    public Game(Predicate<Area> canContinue, TurnValidator validator, BallGenerator ballGenerator,
-                AreaCleaner areaCleaner, Player player, Area area, GameScope scope) {
+    public Game(@Named("gameCanBeContinuePredicate") Predicate<Area> canContinue,
+                TurnValidator validator, BallGenerator ballGenerator,
+                Player player, MutableArea area, GameScope scope, AreaCleaner areaCleaner) {
         this.canContinue = canContinue;
         this.validator = validator;
         this.ballGenerator = ballGenerator;
-        this.areaCleaner = areaCleaner;
         this.player = player;
         this.area = area;
         this.scope = scope;
+        this.areaCleaner = areaCleaner;
     }
 
     public void play() {
@@ -50,15 +57,20 @@ public class Game {
         scope.reset();
     }
 
-    private void addBalls(Set<Ball> generate) {
-        throw new UnsupportedOperationException("Not implemented yet"); //TODO: [stas]: implement
+    private void addBalls(Set<Ball> generated) {
+        area.addBalls(generated);
     }
 
     private boolean removeLinesIfTheyExist() {
-        throw new UnsupportedOperationException("Not implemented yet"); //TODO: [stas]: implement
+        final Set<Ball> removed = areaCleaner.clean(area);
+        area.removeBalls(removed);
+        return !removed.isEmpty();
     }
 
-    private void applyTurn(Turn turn) {
-        throw new UnsupportedOperationException("Not implemented yet"); //TODO: [stas]: implement
+    private void applyTurn(final Turn turn) {
+        final Ball original = turn.original();
+        area.removeBalls(of(original));
+        area.addBalls(ImmutableSet.<Ball>of(new SimpleBall(original.color(), turn.moveTo())));
+
     }
 }
