@@ -14,7 +14,7 @@ import static com.google.common.collect.Maps.newHashMap;
  */
 @Singleton
 public class GameScope implements Scope {
-    private final Map<Key, Object> currentScope = newHashMap();
+    private final Map<Key, Provider> currentScope = newHashMap();
 
     public void reset() {
         currentScope.clear();
@@ -28,7 +28,7 @@ public class GameScope implements Scope {
                 if (!currentScope.containsKey(key)) {
                     currentScope.put(key, unscoped);
                 }
-                return (T) currentScope.get(key);
+                return (T) currentScope.get(key).get();
             }
         };
     }
