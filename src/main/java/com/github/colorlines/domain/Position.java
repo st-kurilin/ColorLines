@@ -3,6 +3,8 @@ package com.github.colorlines.domain;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 
+import static com.google.common.base.Preconditions.checkArgument;
+
 /**
  * @author Stanislav Kurilin
  */
@@ -12,9 +14,15 @@ public final class Position {
 
     private final int x, y;
 
-    public Position(int y, int x) {
-        this.y = y;
+    public static Position create(int x, int y) {
+        checkArgument(WIDTH_RANGE.contains(x));
+        checkArgument(HEIGHT_RANGE.contains(y));
+        return new Position(x, y);
+    }
+
+    private Position(int x, int y) {
         this.x = x;
+        this.y = y;
     }
 
     public int getX() {
