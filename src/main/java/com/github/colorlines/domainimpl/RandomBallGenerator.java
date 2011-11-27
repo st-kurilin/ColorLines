@@ -3,6 +3,7 @@ package com.github.colorlines.domainimpl;
 import com.github.colorlines.domain.*;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Range;
+import com.google.common.collect.Ranges;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -44,12 +45,14 @@ public class RandomBallGenerator implements BallGenerator {
         return candidate;
     }
 
+    private Color randomColor() {
+        final Color[] all = Color.values();
+        final int randIndex = integerInRange(Ranges.closed(0, all.length));
+        return all[randIndex];
+    }
+
     private int integerInRange(Range<Integer> range) {
         final int width = range.upperEndpoint() - range.lowerEndpoint();
         return random.nextInt(width) + range.lowerEndpoint();
-    }
-
-    private Color randomColor() {
-        throw new UnsupportedOperationException("Not implemented yet"); //TODO: [stas]: implement
     }
 }
