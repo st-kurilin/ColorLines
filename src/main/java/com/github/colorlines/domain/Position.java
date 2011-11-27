@@ -1,9 +1,15 @@
 package com.github.colorlines.domain;
 
+import com.google.common.collect.Range;
+import com.google.common.collect.Ranges;
+
 /**
  * @author Stanislav Kurilin
  */
 public final class Position {
+    public static Range<Integer> WIDTH_RANGE = Ranges.closed(0, 9);
+    public static Range<Integer> HEIGHT_RANGE = Ranges.closed(0, 9);
+
     private final int x, y;
 
     public Position(int y, int x) {
