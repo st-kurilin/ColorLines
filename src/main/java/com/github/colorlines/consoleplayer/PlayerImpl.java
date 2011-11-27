@@ -7,7 +7,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Created by IntelliJ IDEA.
  * User: Alex Lenkevich
  * Date: 27.11.11
  * Time: 12:52
@@ -20,16 +19,16 @@ public class PlayerImpl implements Player {
     public Turn turn(Area area, TurnValidator validator) {
         StringBuffer buf = new StringBuffer();
 
-        for (int y = 0; y < Position.HEIGHT_RANGE.upperEndpoint(); y++) {
-            for (int x = 0; x < Position.HEIGHT_RANGE.lowerEndpoint(); x++) {
+        for (int y = Position.HEIGHT_RANGE.lowerEndpoint(); y <= Position.HEIGHT_RANGE.upperEndpoint(); y++) {
+            for (int x = Position.WIDTH_RANGE.lowerEndpoint(); x <= Position.WIDTH_RANGE.upperEndpoint(); x++) {
                 Position position = Position.create(x, y);
                 buf.append("|").append(
                         area.contains(position)
                                 ? colorToStringConverter.convert(area.take(position).color())
                                 : " "
-                ).append("|");
+                );
             }
-            buf.append("\n");
+            buf.append("|\n");
         }
         System.out.println(buf);
         while (true) {
@@ -43,8 +42,8 @@ public class PlayerImpl implements Player {
                 int xd = Integer.parseInt(matcher.group(3));
                 int yd = Integer.parseInt(matcher.group(4));
 
-                Position endPos = Position.create(xd, yd);
                 Position startPos = Position.create(xs, ys);
+                Position endPos = Position.create(xd, yd);
 
                 if (area.contains(startPos)) {
                     Ball ball = area.take(startPos);

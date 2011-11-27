@@ -9,8 +9,8 @@ import static com.google.common.base.Preconditions.checkArgument;
  * @author Stanislav Kurilin
  */
 public final class Position {
-    public static Range<Integer> WIDTH_RANGE = Ranges.closed(0, 9);
-    public static Range<Integer> HEIGHT_RANGE = Ranges.closed(0, 9);
+    public static Range<Integer> WIDTH_RANGE = Ranges.closed(0, 8);
+    public static Range<Integer> HEIGHT_RANGE = Ranges.closed(0, 8);
 
     private final int x, y;
 

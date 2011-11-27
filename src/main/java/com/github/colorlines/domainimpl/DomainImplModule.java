@@ -1,7 +1,10 @@
 package com.github.colorlines.domainimpl;
 
+import com.github.colorlines.Game;
+import com.github.colorlines.consoleplayer.PlayerImpl;
 import com.github.colorlines.domain.*;
 import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
 import com.google.inject.Provides;
 import com.google.inject.name.Names;
 
@@ -24,17 +27,16 @@ public class DomainImplModule extends AbstractModule {
                 return true;
             }
         });
-        bind(Player.class).toInstance(new Player() {
-            @Override
-            public Turn turn(Area area, TurnValidator validator) {
-                throw new UnsupportedOperationException("Not implemented yet"); //TODO: [stas]: implement
-            }
-        });
+        bind(Player.class).to(PlayerImpl.class);
     }
 
     @Provides
     @Singleton
     Area area(MutableArea area) {
         return area;
+    }
+
+    public static void main(String[] args) {
+        Guice.createInjector(new DomainImplModule()).getInstance(Game.class).play();
     }
 }
