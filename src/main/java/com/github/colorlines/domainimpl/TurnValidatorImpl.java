@@ -85,8 +85,8 @@ public class TurnValidatorImpl implements TurnValidator {
         };
     }
 
-    private Set<Position> neiborhoods(Position left) {
-        return newHashSet(Collections2.transform(filter(cartesianProduct(of(left.getX(), left.getX() + 1, left.getX() - 1),
+    private Set<Position> neiborhoods(final Position left) {
+        return newHashSet(Collections2.filter(Collections2.transform(filter(cartesianProduct(of(left.getX(), left.getX() + 1, left.getX() - 1),
                 of(left.getY(), left.getY() + 1, left.getY() - 1)), new Predicate<List<Integer>>() {
             @Override
             public boolean apply(List<Integer> input) {
@@ -102,6 +102,11 @@ public class TurnValidatorImpl implements TurnValidator {
                 final Integer x = input.get(0);
                 final Integer y = input.get(1);
                 return Position.create(x, y);
+            }
+        }), new Predicate<Position>() {
+            @Override
+            public boolean apply(@Nullable Position o) {
+                return distance(o, left) == 1;
             }
         }));
     }

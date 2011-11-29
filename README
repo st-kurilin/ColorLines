@@ -1,0 +1,3 @@
+Color Lines game. 
+Currently used technologies: Maven, Guice, Guava, TestNG
+There is only console client available now.
