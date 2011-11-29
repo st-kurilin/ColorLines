@@ -37,7 +37,7 @@ class PlayerImpl implements Player {
         }
         System.out.println(buf);
         while (true) {
-            System.out.println("Your turn (X Y -> X Y) :");
+            System.out.println("Your turn (X Y X Y) :");
             Scanner scanner = new Scanner(System.in);
             String moveText = scanner.nextLine();
             Matcher matcher = movePattern.matcher(moveText);
