@@ -53,4 +53,9 @@ public class ValidatorTests {
                 create(2, 1), create(2, 3), create(3, 3), create(1, 3), create(0, 3), create(3, 0), create(3, 2));
     }
 
+    @Test
+    public void move_when_blocked_at_middle() {
+        testCannot("Blocked", create(2, 2), create(6, 6),
+                create(2, 3), create(2, 1), create(1, 2), create(3, 2));
+    }
 }
