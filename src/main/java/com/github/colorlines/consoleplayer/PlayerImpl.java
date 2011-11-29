@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class PlayerImpl implements Player {
 
     private final ColorToStringConverter colorToStringConverter = new ColorToStringConverter();
-    private final static Pattern movePattern = Pattern.compile("(\\d+)\\s+(\\d+)\\s*->\\s*(\\d+)\\s+(\\d+)");
+    private final static Pattern movePattern = Pattern.compile("(\\d)\\s*(\\d)\\s*(\\d)\\s*(\\d)");
 
     public Turn turn(Area area, TurnValidator validator) {
         StringBuffer buf = new StringBuffer();
