@@ -1,7 +1,6 @@
 package com.github.colorlines.domainimpl;
 
 import com.github.colorlines.domain.*;
-import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Range;
 import com.google.common.collect.Ranges;
 
@@ -32,12 +31,12 @@ public class RandomBallGenerator implements BallGenerator {
         while (set.size() != generateByOneTime) {
             Position newPosition = randomFreeLocation();
             boolean exists = false;
-            for(Ball b : set){
-                if(b.position().equals(newPosition)){
+            for (Ball b : set) {
+                if (b.position().equals(newPosition)) {
                     exists = true;
                 }
             }
-            if(!exists){
+            if (!exists) {
                 set.add(new SimpleBall(randomColor(), newPosition));
             }
         }

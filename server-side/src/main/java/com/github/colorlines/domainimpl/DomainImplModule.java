@@ -1,7 +1,9 @@
 package com.github.colorlines.domainimpl;
 
-import com.github.colorlines.consoleplayer.PlayerImpl;
-import com.github.colorlines.domain.*;
+import com.github.colorlines.domain.Area;
+import com.github.colorlines.domain.AreaCleaner;
+import com.github.colorlines.domain.BallGenerator;
+import com.github.colorlines.domain.TurnValidator;
 import com.google.common.base.Predicate;
 import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
@@ -24,7 +26,7 @@ public class DomainImplModule extends AbstractModule {
         bind(new TypeLiteral<Predicate<Area>>() {
         }).annotatedWith(Names.named("gameCanBeContinuePredicate")).to(GameCanBeContinuePredicate.class);
 
-        bind(Player.class).to(PlayerImpl.class);
+
         bind(Area.class).to(MutableArea.class);
 
     }

@@ -3,9 +3,16 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github</groupId>
+    <groupId>com.github.colorlines</groupId>
     <artifactId>color-lines</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
+    <modules>
+        <module>domain</module>
+        <module>server-side</module>
+        <module>console-client</module>
+        <module>console-game</module>
+    </modules>
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>

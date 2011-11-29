@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  * Date: 27.11.11
  * Time: 12:52
  */
-public class PlayerImpl implements Player {
+class PlayerImpl implements Player {
 
     private final ColorToStringConverter colorToStringConverter = new ColorToStringConverter();
     private final static Pattern movePattern = Pattern.compile("(\\d)\\s*(\\d)\\s*(\\d)\\s*(\\d)");
@@ -20,7 +20,7 @@ public class PlayerImpl implements Player {
         StringBuffer buf = new StringBuffer();
         buf.append("| ");
         for (int x = Position.WIDTH_RANGE.lowerEndpoint(); x <= Position.WIDTH_RANGE.upperEndpoint(); x++) {
-             buf.append("|").append(x);
+            buf.append("|").append(x);
         }
         buf.append("|\n");
         for (int y = Position.HEIGHT_RANGE.lowerEndpoint(); y <= Position.HEIGHT_RANGE.upperEndpoint(); y++) {

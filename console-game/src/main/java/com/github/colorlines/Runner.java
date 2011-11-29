@@ -1,5 +1,6 @@
 package com.github.colorlines;
 
+import com.github.colorlines.consoleplayer.ConsolePlayerModule;
 import com.github.colorlines.domainimpl.DomainImplModule;
 import com.google.inject.Guice;
 
@@ -8,6 +9,7 @@ import com.google.inject.Guice;
  */
 public class Runner {
     public static void main(String[] args) {
-        Guice.createInjector(new DomainImplModule()).getInstance(Game.class).play();
+        Guice.createInjector(new DomainImplModule(), new ConsolePlayerModule())
+                .getInstance(Game.class).play();
     }
 }

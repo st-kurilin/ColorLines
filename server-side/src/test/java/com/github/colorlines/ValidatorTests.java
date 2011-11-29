@@ -1,6 +1,5 @@
 package com.github.colorlines;
 
-import com.github.colorlines.consoleplayer.TurnImpl;
 import com.github.colorlines.domain.Position;
 import com.github.colorlines.domainimpl.TurnValidatorImpl;
 import com.google.common.collect.Lists;
