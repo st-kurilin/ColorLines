@@ -92,6 +92,33 @@ public class CleanerTests {
         assertEquals(cleanBalls, etalonBalls);
     }
 
+    @Test
+    public void testTest3() {
+        Area area = new MatrizArea(new int[][]{
+                {0, 0, 1, 1, 4, 3, 0, 0, 0},
+                {0, 0, 0, 0, 0, 3, 0, 4, 0},
+                {0, 0, 5, 0, 0, 0, 4, 1, 0},
+                {0, 0, 0, 0, 0, 0, 3, 1, 0},
+                {0, 0, 0, 5, 0, 0, 3, 3, 0},
+                {0, 0, 0, 0, 0, 0, 0, 3, 0},
+                {4, 1, 1, 0, 0, 2, 0, 3, 0},
+                {0, 1, 0, 1, 0, 1, 0, 3, 0},
+                {0, 0, 0, 0, 0, 0, 0, 3, 0}}
+
+        );
+        Set<Ball> etalonBalls = newHashSet();
+
+        etalonBalls.add(area.take(Position.create(7, 4)));
+        etalonBalls.add(area.take(Position.create(7, 5)));
+        etalonBalls.add(area.take(Position.create(7, 6)));
+        etalonBalls.add(area.take(Position.create(7, 7)));
+        etalonBalls.add(area.take(Position.create(7, 8)));
+
+
+        Set<Ball> cleanBalls = new PatternBasedCleaner().clean(area);
+        assertEquals(cleanBalls, etalonBalls);
+    }
+
 
 }
 
