@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>color-lines</artifactId>
+        <groupId>com.github.colorlines</groupId>
+        <version>1.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>gui-game</artifactId>
+
+    <properties>
+        <jfxrt.directory>C:\Program Files\Oracle\JavaFX Runtime 2.0\lib</jfxrt.directory>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>com.github.colorlines</groupId>
+            <artifactId>server-side</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>javafx</groupId>
+            <artifactId>jfxrt</artifactId>
+            <version>2.0</version>
+            <type>jar</type>
+            <scope>system</scope>
+            <systemPath>${jfxrt.directory}\jfxrt.jar</systemPath>
+        </dependency>
+    </dependencies>
+</project>
