@@ -12,8 +12,8 @@ class ColorToStringConverter {
 
     public String convert(Color color) {
         switch (color) {
-            case BLACK:
-                return "D";
+            case PINK:
+                return "P";
             case BLUE:
                 return "B";
             case GREEN:
