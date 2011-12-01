@@ -4,20 +4,16 @@ import com.github.colorlines.domain.Area;
 import com.github.colorlines.domain.Position;
 import com.github.colorlines.domain.Turn;
 import com.github.colorlines.domain.TurnValidator;
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Collections2;
 
 import javax.annotation.Nullable;
 import java.util.Comparator;
-import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
-import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Predicates.and;
-import static com.google.common.collect.ImmutableSet.of;
-import static com.google.common.collect.Sets.*;
+import static com.google.common.collect.Sets.filter;
+import static com.google.common.collect.Sets.newHashSet;
 import static java.lang.Math.ceil;
 
 /**
@@ -86,29 +82,12 @@ public class TurnValidatorImpl implements TurnValidator {
     }
 
     private Set<Position> neiborhoods(final Position left) {
-        return newHashSet(Collections2.filter(Collections2.transform(filter(cartesianProduct(of(left.getX(), left.getX() + 1, left.getX() - 1),
-                of(left.getY(), left.getY() + 1, left.getY() - 1)), new Predicate<List<Integer>>() {
-            @Override
-            public boolean apply(List<Integer> input) {
-                checkArgument(input.size() == 2);
-                final Integer x = input.get(0);
-                final Integer y = input.get(1);
-                return Position.WIDTH_RANGE.contains(x) && Position.HEIGHT_RANGE.contains(y);
-            }
-        }), new Function<List<Integer>, Position>() {
-            @Override
-            public Position apply(List<Integer> input) {
-                checkArgument(input.size() == 2);
-                final Integer x = input.get(0);
-                final Integer y = input.get(1);
-                return Position.create(x, y);
-            }
-        }), new Predicate<Position>() {
+        return filter(Position.ALL, new Predicate<Position>() {
             @Override
             public boolean apply(@Nullable Position o) {
                 return distance(o, left) == 1;
             }
-        }));
+        });
     }
 
     private static class PathStep {
