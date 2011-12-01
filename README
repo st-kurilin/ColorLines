@@ -1,3 +1,10 @@
-Color Lines game. 
-Currently used technologies: Maven, Guice, Guava, TestNG
-There is only console client available now.
+Color Lines game with JavaFX 2.0 client. 
+Currently used technologies: Maven, Guice, Guava, TestNG, JavaFX2
+
+There is only very-bad-coded client available now.
+
+There are some issues with buildings now. You should:
+*provide mat.dll and javafx-font.dll
+*specify javafx.jar in gui-fame/pom.xml
+
+Feel free to contact me with any question.
