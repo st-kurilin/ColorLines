@@ -3,13 +3,11 @@ package com.github.colorlines.domainimpl;
 import com.github.colorlines.domain.*;
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableSet;
-import com.google.common.collect.Sets;
 import com.google.common.collect.UnmodifiableIterator;
 
 import javax.inject.Named;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import static com.github.colorlines.domain.Position.*;
@@ -123,17 +121,10 @@ public class PatternBasedCleaner implements AreaCleaner {
             this.iteratorFactory = iteratorFactory;
         }
 
-        final Iterable<Position> positions = transform(Sets.cartesianProduct(X_VALUES, Y_VALUES), new Function<List<Integer>, Position>() {
-            @Override
-            public Position apply(List<Integer> integers) {
-                return create(integers.get(0), integers.get(1));
-            }
-        });
-
         @Override
         public Set<Ball> apply(Area area) {
             final ImmutableSet.Builder<Ball> result = ImmutableSet.builder();
-            for (Position init : positions) {
+            for (Position init : Position.ALL) {
                 if (!area.contains(init)) continue;
                 final Iterator<Position> it = iteratorFactory.iterator(init);
                 final ImmutableSet.Builder<Ball> builder = ImmutableSet.builder();
@@ -150,6 +141,4 @@ public class PatternBasedCleaner implements AreaCleaner {
             return result.build();
         }
     }
-
-    ;
 }
