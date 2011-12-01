@@ -12,6 +12,7 @@
         <module>server-side</module>
         <module>console-client</module>
         <module>console-game</module>
+        <module>gui-game</module>
     </modules>
     <dependencies>
         <dependency>
