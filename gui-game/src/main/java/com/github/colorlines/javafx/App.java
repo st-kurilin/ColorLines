@@ -93,9 +93,8 @@ public class App extends Application {
                 btn.setOnAction(new EventHandler<ActionEvent>() {
                     public void handle(ActionEvent event) {
                         if (blocked) return;
-                        if (start == null) {
-                            if (area.contains(position))
-                                start = position;
+                        if (area.contains(position)) {
+                            start = position;
                         } else {
                             final Position start1 = start;
                             start = null;
